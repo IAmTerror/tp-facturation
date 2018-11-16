@@ -45,11 +45,18 @@ public class ListeClients extends HttpServlet {
     public void init() throws ServletException {
         super.init();
         try {
+
+            String user = getServletContext().getInitParameter("user");
+            String password = getServletContext().getInitParameter("password");
+            String nameBDD = getServletContext().getInitParameter("nameBDD");
+            String host = getServletContext().getInitParameter("host");
+            String port = getServletContext().getInitParameter("port");
+
             Class.forName("org.postgresql.Driver");
             Properties props = new Properties();
-            props.setProperty("user", "postgres");
-            props.setProperty("password", "secret");
-            conn = DriverManager.getConnection("jdbc:postgresql://192.168.99.100/exemple", props);
+            props.setProperty("user", user);
+            props.setProperty("password", password);
+            conn = DriverManager.getConnection("jdbc:postgresql://"+host+":"+port+"/"+nameBDD, props);
 //            conn = DriverManager.getConnection("jdbc:postgresql://localhost/exemple", props);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
