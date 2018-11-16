@@ -11,13 +11,12 @@
 <hr width="100%" />
 
 <table border="1" >
-    <tr><th>Nom</th><th>Prénom</th><th>Ville</th><th>Pays</th></tr>
+    <tr><th>Nom</th><th>Prénom</th><th>Détail</th></tr>
     <c:forEach var="client" items="${clients}">
         <tr>
             <td> ${client.nom} </td>
             <td> ${client.pnom} </td>
-            <td> ${client.loc} </td>
-            <td> ${client.pays} </td>
+            <td> <a href="\detail?id=${client.num}">Infos</a></td>
         </tr>
     </c:forEach>
 </table>

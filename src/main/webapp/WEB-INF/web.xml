@@ -35,9 +35,19 @@
         <servlet-class>fr.laerce.facturation.ListeClients</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>Detail</servlet-name>
+        <servlet-class>fr.laerce.facturation.Detail</servlet-class>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>ListeClients</servlet-name>
         <url-pattern>/clients.html</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>Detail</servlet-name>
+        <url-pattern>/detail</url-pattern>
     </servlet-mapping>
 
 </web-app>
