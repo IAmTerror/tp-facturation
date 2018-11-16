@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+// TODO : améliorer la présentation de la vue detail.jsp
 // TODO : formulaire dans detail avec UPDATE ou DELETE d'un client
 // TODO : Factoriser la connection conn
 // TODO : changer nom package
@@ -26,10 +27,23 @@ public class Detail extends HttpServlet {
 
         try {
             Statement statement = conn.createStatement();
-            // TODO : WHERE...
             String query = "SELECT clt_num, clt_nom, clt_pnom, clt_loc, clt_pays FROM clients WHERE clt_num = '"+ id +"'";
             ResultSet rs = statement.executeQuery(query);
-//            httpServletRequest.setAttribute("client", client);
+            Client client = null;
+            while (rs.next()) {
+
+                    System.out.println(rs.getString("clt_num"));
+                    client = new Client(rs.getString("clt_num"),
+                            rs.getString("clt_nom"),
+                            rs.getString("clt_pnom"),
+                            rs.getString("clt_loc"),
+                            rs.getString("clt_pays"));
+            }
+            System.out.println(id);
+
+            // pour les besoins de la vue
+            httpServletRequest.setAttribute("client", client);
+            // Delegation à la vue
             String jspview = "detail.jsp";
             getServletConfig().getServletContext()
                     .getRequestDispatcher("/WEB-INF/jsp/" + jspview)
