@@ -32,8 +32,6 @@ public class ListeClients extends HttpServlet {
                         res.getString("clt_loc"),
                         res.getString("clt_pays")));
             }
-            res.close();
-            statement.close();
 
             // pour les besoins de la vue
             httpServletRequest.setAttribute("clients", clients);
@@ -42,8 +40,6 @@ public class ListeClients extends HttpServlet {
             getServletConfig().getServletContext()
                     .getRequestDispatcher("/WEB-INF/jsp/"+laVue).forward(httpServletRequest, httpServletResponse);
 
-
-            conn.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -66,7 +62,6 @@ public class ListeClients extends HttpServlet {
             props.setProperty("user", user);
             props.setProperty("password", password);
             conn = DriverManager.getConnection("jdbc:postgresql://"+host+":"+port+"/"+nameBDD, props);
-//            conn = DriverManager.getConnection("jdbc:postgresql://localhost/exemple", props);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
             throw new ServletException("Pas de Driver SQL");

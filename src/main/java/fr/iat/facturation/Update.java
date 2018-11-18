@@ -14,7 +14,7 @@ import java.util.Properties;
 // TODO : Factoriser la connection conn
 // TODO : close connections, requêtes, etc...
 
-public class Detail extends HttpServlet {
+public class Update extends HttpServlet {
     Connection conn;
 
     @Override
@@ -32,13 +32,12 @@ public class Detail extends HttpServlet {
             // UPDATE --------------------------------------------------------------------------------------------------
             String updateQuery = "update clients set clt_nom='"+nom+"', clt_pnom='"+prenom+"', clt_loc='"+loc+"', clt_pays='"+pays+"'  where clt_num='"+id+"'";
             statement.executeUpdate(updateQuery);
-            statement.close();
+
 
             // DELETE --------------------------------------------------------------------------------------------------
-            Statement statement2 = conn.createStatement();
-            String deleteQuery = "DELETE from clients where clt_num='"+id+"'";
-            statement2.executeUpdate(deleteQuery);
-            statement2.close();
+//            Statement statement2 = conn.createStatement();
+//            String deleteQuery = "DELETE from clients where clt_num='"+id+"'";
+//            statement2.executeUpdate(deleteQuery);
 
             // redirection
             httpServletResponse.sendRedirect("/clients.html");
@@ -72,12 +71,10 @@ public class Detail extends HttpServlet {
             // pour les besoins de la vue
             httpServletRequest.setAttribute("client", client);
             // délegation à la vue
-            String jspview = "detail.jsp";
+            String jspview = "update.jsp";
             getServletConfig().getServletContext()
                     .getRequestDispatcher("/WEB-INF/jsp/" + jspview)
                     .forward(httpServletRequest, httpServletResponse);
-
-            conn.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -100,7 +97,6 @@ public class Detail extends HttpServlet {
             props.setProperty("user", user);
             props.setProperty("password", password);
             conn = DriverManager.getConnection("jdbc:postgresql://" + host + ":" + port + "/" + nameBDD, props);
-//            conn = DriverManager.getConnection("jdbc:postgresql://localhost/exemple", props);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
             throw new ServletException("Pas de Driver SQL");

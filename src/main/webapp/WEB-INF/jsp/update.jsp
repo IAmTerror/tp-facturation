@@ -10,7 +10,7 @@
 <p/>
 <hr width="100%"/>
 
-<form method="post" action="/detail">
+<form method="post" action="/update">
     <fieldset>
         <legend>Client</legend>
         <div class="button">

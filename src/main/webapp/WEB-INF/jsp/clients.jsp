@@ -16,10 +16,11 @@
         <tr>
             <td> ${client.nom} </td>
             <td> ${client.pnom} </td>
-            <td> <a href="\detail?id=${client.num}">Infos</a></td>
+            <td> <a href="\update?id=${client.num}">Infos</a></td>
         </tr>
     </c:forEach>
 </table>
+
 
 </body>
 </html>

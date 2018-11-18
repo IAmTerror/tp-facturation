@@ -36,8 +36,8 @@
     </servlet>
 
     <servlet>
-        <servlet-name>Detail</servlet-name>
-        <servlet-class>fr.iat.facturation.Detail</servlet-class>
+        <servlet-name>Update</servlet-name>
+        <servlet-class>fr.iat.facturation.Update</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -46,8 +46,8 @@
     </servlet-mapping>
 
     <servlet-mapping>
-        <servlet-name>Detail</servlet-name>
-        <url-pattern>/detail</url-pattern>
+        <servlet-name>Update</servlet-name>
+        <url-pattern>/update</url-pattern>
     </servlet-mapping>
 
 </web-app>
