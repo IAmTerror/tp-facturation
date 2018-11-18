@@ -12,8 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-// TODO : formulaire dans detail avec INSERT d'un client
-
 public class ListeClients extends HttpServlet {
 
     Connection conn;
