@@ -10,12 +10,12 @@
 <p/>
 <hr width="100%"/>
 
-<form method="post" action="detail.jsp">
+<form method="post" action="/detail">
     <fieldset>
         <legend>Client</legend>
         <div>
             <label for="id">ID : </label>
-            <input type="text" id="id" name="id" value="${client.num}" />
+            <input type="text" id="id" name="id" value="${client.num}" readonly />
         </div>
         <br />
         <div>
@@ -24,13 +24,13 @@
         </div>
         <br />
         <div>
-            <label for="prenom">Prénom : </label>
-            <input type="text" id="prenom" name="prenom" value="${client.pnom}" />
+            <label for="pnom">Prénom : </label>
+            <input type="text" id="pnom" name="pnom" value="${client.pnom}" />
         </div>
         <br />
         <div>
-            <label for="ville">Ville : </label>
-            <input type="text" id="ville" name="ville" value="${client.loc}" />
+            <label for="loc">Ville : </label>
+            <input type="text" id="loc" name="loc" value="${client.loc}" />
         </div>
         <br />
         <div>
@@ -39,7 +39,7 @@
         </div>
         <br />
         <div class="button">
-            <button type="submit" name=validez">Update</button>
+            <button type="submit" name=validez">Mettre à jour les données du client</button>
         </div>
     </fieldset>
 </form>

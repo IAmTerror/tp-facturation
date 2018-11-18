@@ -20,6 +20,7 @@ public class ListeClients extends HttpServlet {
 
         try {
 
+            // SELECT --------------------------------------------------------------------------------------------------
             Statement req = conn.createStatement();
             String query = "SELECT clt_num, clt_nom, clt_pnom, clt_loc, clt_pays FROM clients";
             ResultSet res = req.executeQuery(query);

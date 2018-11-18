@@ -12,9 +12,31 @@ import java.util.Properties;
 
 // TODO : formulaire dans detail avec UPDATE ou DELETE ou INSERT d'un client
 // TODO : Factoriser la connection conn
+// TODO : close connections, requêtes, etc...
 
 public class Detail extends HttpServlet {
     Connection conn;
+
+    @Override
+    protected void doPost(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException, IOException {
+
+        String id = httpServletRequest.getParameter("id");
+        String nom = httpServletRequest.getParameter("nom");
+        String prenom = httpServletRequest.getParameter("pnom");
+        String loc = httpServletRequest.getParameter("loc");
+        String pays = httpServletRequest.getParameter("pays");
+
+        try {
+
+            Statement statement = conn.createStatement();
+            // UPDATE --------------------------------------------------------------------------------------------------
+            String updateQuery = "update clients set clt_nom='"+nom+"', clt_pnom='"+prenom+"', clt_loc='"+loc+"', clt_pays='"+pays+"'  where clt_num='"+id+"'";
+            statement.executeUpdate(updateQuery);
+            httpServletResponse.sendRedirect("/clients.html");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     protected void doGet(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException, IOException {
@@ -23,19 +45,18 @@ public class Detail extends HttpServlet {
 
         try {
             Statement statement = conn.createStatement();
+
+            // SELECT --------------------------------------------------------------------------------------------------
             String query = "SELECT clt_num, clt_nom, clt_pnom, clt_loc, clt_pays FROM clients WHERE clt_num = '" + id + "'";
             ResultSet rs = statement.executeQuery(query);
             Client client = null;
             while (rs.next()) {
-
-                System.out.println(rs.getString("clt_num"));
                 client = new Client(rs.getString("clt_num"),
                         rs.getString("clt_nom"),
                         rs.getString("clt_pnom"),
                         rs.getString("clt_loc"),
                         rs.getString("clt_pays"));
             }
-            System.out.println(id);
 
             // pour les besoins de la vue
             httpServletRequest.setAttribute("client", client);
