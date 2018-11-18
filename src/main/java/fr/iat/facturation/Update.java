@@ -10,8 +10,6 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.Properties;
 
-// TODO : formulaire dans detail avec INSERT d'un client
-
 public class Update extends HttpServlet {
     Connection conn;
 

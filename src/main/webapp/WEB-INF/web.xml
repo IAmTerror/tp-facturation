@@ -45,6 +45,11 @@
         <servlet-class>fr.iat.facturation.Delete</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>Create</servlet-name>
+        <servlet-class>fr.iat.facturation.Create</servlet-class>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>ListeClients</servlet-name>
         <url-pattern>/clients.html</url-pattern>
@@ -58,6 +63,11 @@
     <servlet-mapping>
         <servlet-name>Delete</servlet-name>
         <url-pattern>/delete</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>Create</servlet-name>
+        <url-pattern>/create.jsp</url-pattern>
     </servlet-mapping>
 
 </web-app>

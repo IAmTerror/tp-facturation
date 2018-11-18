@@ -10,9 +10,11 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.*;
 
-public class ListeClients extends HttpServlet {
-    Connection conn;
+// TODO : formulaire dans detail avec INSERT d'un client
 
+public class ListeClients extends HttpServlet {
+
+    Connection conn;
 
     @Override
     protected void doGet(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException, IOException {

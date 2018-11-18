@@ -10,20 +10,24 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.Properties;
 
-public class Delete extends HttpServlet {
+public class Create extends HttpServlet {
     Connection conn;
 
     @Override
     protected void doPost(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException, IOException {
 
         String id = httpServletRequest.getParameter("id");
+        String nom = httpServletRequest.getParameter("nom");
+        String prenom = httpServletRequest.getParameter("pnom");
+        String loc = httpServletRequest.getParameter("loc");
+        String pays = httpServletRequest.getParameter("pays");
 
         try {
 
             Statement statement = conn.createStatement();
-            // DELETE --------------------------------------------------------------------------------------------------
-            String deleteQuery = "DELETE from clients where clt_num='"+id+"'";
-            statement.executeUpdate(deleteQuery);
+            // INSERT --------------------------------------------------------------------------------------------------
+            String insertQuery = "INSERT INTO clients (clt_num,clt_nom, clt_pnom, clt_loc, clt_pays) VALUES ('"+id+"','"+nom+"','"+prenom+"','"+loc+"','"+pays+"')";
+            statement.executeUpdate(insertQuery);
 
             // redirection
             httpServletResponse.sendRedirect("/clients.html");
@@ -57,7 +61,7 @@ public class Delete extends HttpServlet {
             // pour les besoins de la vue
             httpServletRequest.setAttribute("client", client);
             // délegation à la vue
-            String jspview = "delete.jsp";
+            String jspview = "create.jsp";
             getServletConfig().getServletContext()
                     .getRequestDispatcher("/WEB-INF/jsp/" + jspview)
                     .forward(httpServletRequest, httpServletResponse);
