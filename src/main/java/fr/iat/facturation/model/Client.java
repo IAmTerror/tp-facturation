@@ -1,4 +1,4 @@
-package fr.laerce.facturation.model;
+package fr.iat.facturation.model;
 
 /**
  * Projet facturation

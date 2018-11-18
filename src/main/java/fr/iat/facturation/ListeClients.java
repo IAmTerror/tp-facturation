@@ -1,6 +1,6 @@
-package fr.laerce.facturation;
+package fr.iat.facturation;
 
-import fr.laerce.facturation.model.Client;
+import fr.iat.facturation.model.Client;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

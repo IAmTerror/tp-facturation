@@ -13,15 +13,6 @@
 <form method="post" action="detail.jsp">
     <fieldset>
         <legend>Client</legend>
-        <%--ID : ${client.num}--%>
-        <%--<br/>--%>
-        <%--Nom : ${client.nom}--%>
-        <%--<br/>--%>
-        <%--Prénom : ${client.pnom}--%>
-        <%--<br/>--%>
-        <%--Ville : ${client.loc}--%>
-        <%--<br/>--%>
-        <%--Pays : ${client.pays}--%>
         <div>
             <label for="id">ID : </label>
             <input type="text" id="id" name="id" value="${client.num}" />
