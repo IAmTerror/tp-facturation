@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-// TODO : améliorer la présentation de la vue detail.jsp
 // TODO : formulaire dans detail avec UPDATE ou DELETE d'un client
 // TODO : Factoriser la connection conn
 // TODO : changer nom package
