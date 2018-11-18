@@ -16,7 +16,7 @@ public class Client {
     private String loc;
     private String pays;
 
-    public Client(){
+    public Client() {
 
     }
 

@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
 
 // TODO : formulaire dans detail avec INSERT d'un client
 
@@ -27,7 +29,7 @@ public class ListeClients extends HttpServlet {
             String query = "SELECT clt_num, clt_nom, clt_pnom, clt_loc, clt_pays FROM clients";
             ResultSet res = statement.executeQuery(query);
             List<Client> clients = new ArrayList<Client>();
-            while(res.next()){
+            while (res.next()) {
                 clients.add(new Client(res.getString("clt_num"),
                         res.getString("clt_nom"),
                         res.getString("clt_pnom"),
@@ -40,7 +42,7 @@ public class ListeClients extends HttpServlet {
             // délégation à la vue
             String laVue = "clients.jsp";
             getServletConfig().getServletContext()
-                    .getRequestDispatcher("/WEB-INF/jsp/"+laVue).forward(httpServletRequest, httpServletResponse);
+                    .getRequestDispatcher("/WEB-INF/jsp/" + laVue).forward(httpServletRequest, httpServletResponse);
 
 
         } catch (SQLException e) {
@@ -63,7 +65,7 @@ public class ListeClients extends HttpServlet {
             Properties props = new Properties();
             props.setProperty("user", user);
             props.setProperty("password", password);
-            conn = DriverManager.getConnection("jdbc:postgresql://"+host+":"+port+"/"+nameBDD, props);
+            conn = DriverManager.getConnection("jdbc:postgresql://" + host + ":" + port + "/" + nameBDD, props);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
             throw new ServletException("Pas de Driver SQL");

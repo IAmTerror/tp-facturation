@@ -22,7 +22,7 @@ public class Delete extends HttpServlet {
 
             Statement statement = conn.createStatement();
             // DELETE --------------------------------------------------------------------------------------------------
-            String deleteQuery = "DELETE from clients where clt_num='"+id+"'";
+            String deleteQuery = "DELETE from clients where clt_num='" + id + "'";
             statement.executeUpdate(deleteQuery);
 
             // redirection

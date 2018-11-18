@@ -27,8 +27,7 @@ public class Update extends HttpServlet {
 
             Statement statement = conn.createStatement();
             // UPDATE --------------------------------------------------------------------------------------------------
-            String updateQuery = "update clients set clt_nom='"+nom+"', clt_pnom='"+prenom+"', clt_loc='"+loc+"', clt_pays='"+pays+"'  where clt_num='"+id+"'";
-            System.out.println(updateQuery);
+            String updateQuery = "update clients set clt_nom='" + nom + "', clt_pnom='" + prenom + "', clt_loc='" + loc + "', clt_pays='" + pays + "'  where clt_num='" + id + "'";
             statement.executeUpdate(updateQuery);
 
             // redirection
