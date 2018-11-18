@@ -32,7 +32,17 @@ public class Detail extends HttpServlet {
             // UPDATE --------------------------------------------------------------------------------------------------
             String updateQuery = "update clients set clt_nom='"+nom+"', clt_pnom='"+prenom+"', clt_loc='"+loc+"', clt_pays='"+pays+"'  where clt_num='"+id+"'";
             statement.executeUpdate(updateQuery);
+            statement.close();
+
+            // DELETE --------------------------------------------------------------------------------------------------
+            Statement statement2 = conn.createStatement();
+            String deleteQuery = "DELETE from clients where clt_num='"+id+"'";
+            statement2.executeUpdate(deleteQuery);
+            statement2.close();
+
+            // redirection
             httpServletResponse.sendRedirect("/clients.html");
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -44,6 +54,7 @@ public class Detail extends HttpServlet {
         String id = httpServletRequest.getParameter("id");
 
         try {
+
             Statement statement = conn.createStatement();
 
             // SELECT --------------------------------------------------------------------------------------------------
@@ -60,11 +71,14 @@ public class Detail extends HttpServlet {
 
             // pour les besoins de la vue
             httpServletRequest.setAttribute("client", client);
-            // Delegation à la vue
+            // délegation à la vue
             String jspview = "detail.jsp";
             getServletConfig().getServletContext()
                     .getRequestDispatcher("/WEB-INF/jsp/" + jspview)
                     .forward(httpServletRequest, httpServletResponse);
+
+            conn.close();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

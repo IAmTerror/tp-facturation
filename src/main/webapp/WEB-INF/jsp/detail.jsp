@@ -13,6 +13,10 @@
 <form method="post" action="/detail">
     <fieldset>
         <legend>Client</legend>
+        <div class="button">
+            <button type="submit" name=delete">Effacer le client de la base de données</button>
+        </div>
+        <br />
         <div>
             <label for="id">ID : </label>
             <input type="text" id="id" name="id" value="${client.num}" readonly />
@@ -39,7 +43,7 @@
         </div>
         <br />
         <div class="button">
-            <button type="submit" name=validez">Mettre à jour les données du client</button>
+            <button type="submit" name=update">Mettre à jour les données du client</button>
         </div>
     </fieldset>
 </form>

@@ -21,9 +21,9 @@ public class ListeClients extends HttpServlet {
         try {
 
             // SELECT --------------------------------------------------------------------------------------------------
-            Statement req = conn.createStatement();
+            Statement statement = conn.createStatement();
             String query = "SELECT clt_num, clt_nom, clt_pnom, clt_loc, clt_pays FROM clients";
-            ResultSet res = req.executeQuery(query);
+            ResultSet res = statement.executeQuery(query);
             List<Client> clients = new ArrayList<Client>();
             while(res.next()){
                 clients.add(new Client(res.getString("clt_num"),
@@ -32,10 +32,18 @@ public class ListeClients extends HttpServlet {
                         res.getString("clt_loc"),
                         res.getString("clt_pays")));
             }
+            res.close();
+            statement.close();
+
+            // pour les besoins de la vue
             httpServletRequest.setAttribute("clients", clients);
+            // délégation à la vue
             String laVue = "clients.jsp";
             getServletConfig().getServletContext()
                     .getRequestDispatcher("/WEB-INF/jsp/"+laVue).forward(httpServletRequest, httpServletResponse);
+
+
+            conn.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
