@@ -40,6 +40,11 @@
         <servlet-class>fr.iat.facturation.Update</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>Delete</servlet-name>
+        <servlet-class>fr.iat.facturation.Delete</servlet-class>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>ListeClients</servlet-name>
         <url-pattern>/clients.html</url-pattern>
@@ -48,6 +53,11 @@
     <servlet-mapping>
         <servlet-name>Update</servlet-name>
         <url-pattern>/update</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>Delete</servlet-name>
+        <url-pattern>/delete</url-pattern>
     </servlet-mapping>
 
 </web-app>

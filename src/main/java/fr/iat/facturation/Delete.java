@@ -10,28 +10,26 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.Properties;
 
-// TODO : formulaire dans detail avec INSERT d'un client
+// TODO : formulaire dans detail avec UPDATE ou DELETE ou INSERT d'un client
+// TODO : Factoriser la connection conn
+// TODO : close connections, requêtes, etc...
 
-public class Update extends HttpServlet {
+public class Delete extends HttpServlet {
     Connection conn;
 
     @Override
     protected void doPost(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException, IOException {
 
         String id = httpServletRequest.getParameter("id");
-        String nom = httpServletRequest.getParameter("nom");
-        String prenom = httpServletRequest.getParameter("pnom");
-        String loc = httpServletRequest.getParameter("loc");
-        String pays = httpServletRequest.getParameter("pays");
         System.out.println(id);
 
         try {
 
             Statement statement = conn.createStatement();
-            // UPDATE --------------------------------------------------------------------------------------------------
-            String updateQuery = "update clients set clt_nom='"+nom+"', clt_pnom='"+prenom+"', clt_loc='"+loc+"', clt_pays='"+pays+"'  where clt_num='"+id+"'";
-            System.out.println(updateQuery);
-            statement.executeUpdate(updateQuery);
+            // DELETE --------------------------------------------------------------------------------------------------
+            String deleteQuery = "DELETE from clients where clt_num='"+id+"'";
+            System.out.println(deleteQuery);
+            statement.executeUpdate(deleteQuery);
 
             // redirection
             httpServletResponse.sendRedirect("/clients.html");
@@ -65,7 +63,7 @@ public class Update extends HttpServlet {
             // pour les besoins de la vue
             httpServletRequest.setAttribute("client", client);
             // délegation à la vue
-            String jspview = "update.jsp";
+            String jspview = "delete.jsp";
             getServletConfig().getServletContext()
                     .getRequestDispatcher("/WEB-INF/jsp/" + jspview)
                     .forward(httpServletRequest, httpServletResponse);

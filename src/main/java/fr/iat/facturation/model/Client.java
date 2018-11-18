@@ -7,6 +7,7 @@ package fr.iat.facturation.model;
  * Créé le  13/12/2017.
  *
  * @author fred
+ * @author student : IAmTerror
  */
 public class Client {
     private String num;
