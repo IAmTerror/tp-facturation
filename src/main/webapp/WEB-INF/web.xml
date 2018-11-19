@@ -6,7 +6,7 @@
     <display-name>Exemple d'Application Web</display-name>
 
     <listener>
-        <listener-class>fr.iat.facturation.ServletListener</listener-class>
+        <listener-class>fr.iat.facturation.service.ServletListener</listener-class>
     </listener>
 
     <context-param>

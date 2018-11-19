@@ -1,6 +1,7 @@
 package fr.iat.facturation;
 
 import fr.iat.facturation.model.Client;
+import fr.iat.facturation.service.Database;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

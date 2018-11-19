@@ -1,4 +1,4 @@
-package fr.iat.facturation;
+package fr.iat.facturation.service;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
