@@ -8,10 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class Delete extends HttpServlet {
 
@@ -48,11 +45,13 @@ public class Delete extends HttpServlet {
 
         try {
 
-            Statement statement = conn.createStatement();
+//            Statement statement = conn.createStatement();
 
             // SELECT --------------------------------------------------------------------------------------------------
-            String query = "SELECT clt_num, clt_nom, clt_pnom, clt_loc, clt_pays FROM clients WHERE clt_num = '" + id + "'";
-            ResultSet rs = statement.executeQuery(query);
+//            String query = "SELECT clt_num, clt_nom, clt_pnom, clt_loc, clt_pays FROM clients WHERE clt_num = '" + id + "'";
+//            ResultSet rs = statement.executeQuery(query);
+            PreparedStatement statement = db.selectAllFromClientsById(id);
+            ResultSet rs = statement.executeQuery();
             Client client = null;
             while (rs.next()) {
                 client = new Client(rs.getString("clt_num"),

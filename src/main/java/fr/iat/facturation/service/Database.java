@@ -2,6 +2,7 @@ package fr.iat.facturation.service;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class Database {
@@ -20,13 +21,28 @@ public class Database {
 
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+            System.out.println(("Pas de Driver SQL"));
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("Pas de connexion à la base");
         }
     }
 
     public Connection getConnection() {
         return this.conn;
+    }
+
+    public PreparedStatement selectAllFromClients() throws SQLException {
+        String query = "SELECT clt_num, clt_nom, clt_pnom, clt_loc, clt_pays FROM clients";
+        PreparedStatement statement = conn.prepareStatement(query);
+        return statement;
+    }
+
+    public PreparedStatement selectAllFromClientsById(String id) throws SQLException {
+        String query = "SELECT clt_num, clt_nom, clt_pnom, clt_loc, clt_pays FROM clients WHERE clt_num = ?";
+        PreparedStatement statement = conn.prepareStatement(query);
+        statement.setString (1, id);
+        return statement;
     }
 
 //    public ResultSet runSql(String sql) throws SQLException {

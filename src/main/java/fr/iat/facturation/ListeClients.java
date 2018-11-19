@@ -8,10 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,9 +24,11 @@ public class ListeClients extends HttpServlet {
         try {
 
             // SELECT --------------------------------------------------------------------------------------------------
-            Statement statement = conn.createStatement();
-            String query = "SELECT clt_num, clt_nom, clt_pnom, clt_loc, clt_pays FROM clients";
-            ResultSet res = statement.executeQuery(query);
+//            Statement statement = conn.createStatement();
+//            String query = "SELECT clt_num, clt_nom, clt_pnom, clt_loc, clt_pays FROM clients";
+//            ResultSet res = statement.executeQuery(query);
+            PreparedStatement statement = db.selectAllFromClients();
+            ResultSet res = statement.executeQuery();
             List<Client> clients = new ArrayList<Client>();
             while (res.next()) {
                 clients.add(new Client(res.getString("clt_num"),
