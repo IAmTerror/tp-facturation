@@ -19,7 +19,7 @@ public class ListeClients extends HttpServlet {
     protected void doGet(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException, IOException {
 
         Database db = (Database) getServletContext().getAttribute("db");
-        Connection conn = db.getConnection();
+//        Connection conn = db.getConnection();
 
         try {
 
@@ -29,7 +29,7 @@ public class ListeClients extends HttpServlet {
 //            ResultSet res = statement.executeQuery(query);
             PreparedStatement statement = db.selectAllFromClients();
             ResultSet res = statement.executeQuery();
-            List<Client> clients = new ArrayList<Client>();
+            List<Client> clients = new ArrayList<>();
             while (res.next()) {
                 clients.add(new Client(res.getString("clt_num"),
                         res.getString("clt_nom"),

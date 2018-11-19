@@ -38,15 +38,21 @@ public class Database {
         return statement;
     }
 
-    public PreparedStatement selectAllFromClientsById(String id) throws SQLException {
+    public PreparedStatement selectAllFromClientsByNum(String num) throws SQLException {
         String query = "SELECT clt_num, clt_nom, clt_pnom, clt_loc, clt_pays FROM clients WHERE clt_num = ?";
         PreparedStatement statement = conn.prepareStatement(query);
-        statement.setString (1, id);
+        statement.setString (1, num);
         return statement;
     }
 
-//    public ResultSet runSql(String sql) throws SQLException {
-//        Statement sta = conn.createStatement();
-//        return sta.executeQuery(sql);
-//    }
+    public PreparedStatement createClient(String num, String nom, String pnom, String loc, String pays) throws SQLException {
+        String query = "INSERT INTO clients (clt_num, clt_nom, clt_pnom, clt_loc, clt_pays) VALUES (?, ?, ?, ?, ?)";
+        PreparedStatement statement = conn.prepareStatement(query);
+        statement.setString (1, num);
+        statement.setString (2, nom);
+        statement.setString (3, pnom);
+        statement.setString (4, loc);
+        statement.setString (5, pays);
+        return statement;
+    }
 }

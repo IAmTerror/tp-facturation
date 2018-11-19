@@ -43,7 +43,7 @@ public class Update extends HttpServlet {
     protected void doGet(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException, IOException {
 
         Database db = (Database) getServletContext().getAttribute("db");
-        Connection conn = db.getConnection();
+//        Connection conn = db.getConnection();
 
         String id = httpServletRequest.getParameter("id");
 
@@ -54,7 +54,7 @@ public class Update extends HttpServlet {
             // SELECT --------------------------------------------------------------------------------------------------
 //            String query = "SELECT clt_num, clt_nom, clt_pnom, clt_loc, clt_pays FROM clients WHERE clt_num = '" + id + "'";
 //            ResultSet rs = statement.executeQuery(query);
-            PreparedStatement statement = db.selectAllFromClientsById(id);
+            PreparedStatement statement = db.selectAllFromClientsByNum(id);
             ResultSet rs = statement.executeQuery();
             Client client = null;
             while (rs.next()) {

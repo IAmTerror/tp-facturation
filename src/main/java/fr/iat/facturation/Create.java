@@ -16,7 +16,7 @@ public class Create extends HttpServlet {
     protected void doPost(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException, IOException {
 
         Database db = (Database) getServletContext().getAttribute("db");
-        Connection conn = db.getConnection();
+//        Connection conn = db.getConnection();
 
         String id = httpServletRequest.getParameter("id");
         String nom = httpServletRequest.getParameter("nom");
@@ -26,10 +26,13 @@ public class Create extends HttpServlet {
 
         try {
 
-            Statement statement = conn.createStatement();
+//            Statement statement = conn.createStatement();
             // INSERT --------------------------------------------------------------------------------------------------
-            String insertQuery = "INSERT INTO clients (clt_num, clt_nom, clt_pnom, clt_loc, clt_pays) VALUES ('" + id + "','" + nom + "','" + prenom + "','" + loc + "','" + pays + "')";
-            statement.executeUpdate(insertQuery);
+//            String insertQuery = "INSERT INTO clients (clt_num, clt_nom, clt_pnom, clt_loc, clt_pays) VALUES ('" + id + "','" + nom + "','" + prenom + "','" + loc + "','" + pays + "')";
+//            statement.executeUpdate(insertQuery);
+            PreparedStatement statement = db.createClient(id, nom, prenom, loc, pays);
+            System.out.println(statement);
+            statement.executeUpdate();
 
             // redirection
             httpServletResponse.sendRedirect("/clients.html");
@@ -43,7 +46,7 @@ public class Create extends HttpServlet {
     protected void doGet(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException, IOException {
 
         Database db = (Database) getServletContext().getAttribute("db");
-        Connection conn = db.getConnection();
+//        Connection conn = db.getConnection();
 
         String id = httpServletRequest.getParameter("id");
 
@@ -54,7 +57,7 @@ public class Create extends HttpServlet {
             // SELECT --------------------------------------------------------------------------------------------------
 //            String query = "SELECT clt_num, clt_nom, clt_pnom, clt_loc, clt_pays FROM clients WHERE clt_num = '" + id + "'";
 //            ResultSet rs = statement.executeQuery(query);
-            PreparedStatement statement = db.selectAllFromClientsById(id);
+            PreparedStatement statement = db.selectAllFromClientsByNum(id);
             ResultSet rs = statement.executeQuery();
             Client client = null;
             while (rs.next()) {
