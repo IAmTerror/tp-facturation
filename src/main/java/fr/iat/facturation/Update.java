@@ -26,7 +26,6 @@ public class Update extends HttpServlet {
         String prenom = httpServletRequest.getParameter("pnom");
         String loc = httpServletRequest.getParameter("loc");
         String pays = httpServletRequest.getParameter("pays");
-        System.out.println(id);
 
         try {
 
