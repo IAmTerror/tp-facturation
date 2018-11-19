@@ -7,14 +7,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.*;
-import java.util.Properties;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Delete extends HttpServlet {
-    Connection conn;
 
     @Override
     protected void doPost(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException, IOException {
+
+        Database db = (Database) getServletContext().getAttribute("db");
+        Connection conn = db.getConnection();
 
         String id = httpServletRequest.getParameter("id");
 
@@ -35,6 +39,9 @@ public class Delete extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException, IOException {
+
+        Database db = (Database) getServletContext().getAttribute("db");
+        Connection conn = db.getConnection();
 
         String id = httpServletRequest.getParameter("id");
 
@@ -67,29 +74,29 @@ public class Delete extends HttpServlet {
         }
     }
 
-    @Override
-    public void init() throws ServletException {
-        super.init();
-        try {
-
-            String user = getServletContext().getInitParameter("user");
-            String password = getServletContext().getInitParameter("password");
-            String nameBDD = getServletContext().getInitParameter("nameBDD");
-            String host = getServletContext().getInitParameter("host");
-            String port = getServletContext().getInitParameter("port");
-
-            Class.forName("org.postgresql.Driver");
-            Properties props = new Properties();
-            props.setProperty("user", user);
-            props.setProperty("password", password);
-            conn = DriverManager.getConnection("jdbc:postgresql://" + host + ":" + port + "/" + nameBDD, props);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new ServletException("Pas de Driver SQL");
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new ServletException("Pas de connexion à la base");
-        }
-
-    }
+//    @Override
+//    public void init() throws ServletException {
+//        super.init();
+//        try {
+//
+//            String user = getServletContext().getInitParameter("user");
+//            String password = getServletContext().getInitParameter("password");
+//            String nameBDD = getServletContext().getInitParameter("nameBDD");
+//            String host = getServletContext().getInitParameter("host");
+//            String port = getServletContext().getInitParameter("port");
+//
+//            Class.forName("org.postgresql.Driver");
+//            Properties props = new Properties();
+//            props.setProperty("user", user);
+//            props.setProperty("password", password);
+//            conn = DriverManager.getConnection("jdbc:postgresql://" + host + ":" + port + "/" + nameBDD, props);
+//        } catch (ClassNotFoundException e) {
+//            e.printStackTrace();
+//            throw new ServletException("Pas de Driver SQL");
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//            throw new ServletException("Pas de connexion à la base");
+//        }
+//
+//    }
 }
