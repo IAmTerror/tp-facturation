@@ -4,11 +4,7 @@
 
 <web-app>
     <display-name>Exemple d'Application Web</display-name>
-
-    <listener>
-        <listener-class>fr.iat.facturation.service.ServletListener</listener-class>
-    </listener>
-
+    
     <context-param>
         <param-name>user</param-name>
         <param-value>postgres</param-value>
@@ -33,6 +29,10 @@
         <param-name>port</param-name>
         <param-value>5432</param-value>
     </context-param>
+
+    <listener>
+        <listener-class>fr.iat.facturation.service.ServletListener</listener-class>
+    </listener>
 
     <servlet>
         <servlet-name>ListeClients</servlet-name>
