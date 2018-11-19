@@ -16,16 +16,18 @@ public class Delete extends HttpServlet {
     protected void doPost(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException, IOException {
 
         Database db = (Database) getServletContext().getAttribute("db");
-        Connection conn = db.getConnection();
+//        Connection conn = db.getConnection();
 
         String id = httpServletRequest.getParameter("id");
 
         try {
 
-            Statement statement = conn.createStatement();
+//            Statement statement = conn.createStatement();
             // DELETE --------------------------------------------------------------------------------------------------
-            String deleteQuery = "DELETE from clients where clt_num='" + id + "'";
-            statement.executeUpdate(deleteQuery);
+//            String deleteQuery = "DELETE from clients where clt_num='" + id + "'";
+//            statement.executeUpdate(deleteQuery);
+            PreparedStatement statement = db.deleteClient(id);
+            statement.executeUpdate();
 
             // redirection
             httpServletResponse.sendRedirect("/clients.html");

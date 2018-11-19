@@ -55,4 +55,22 @@ public class Database {
         statement.setString (5, pays);
         return statement;
     }
+
+    public PreparedStatement updateClient(String num, String nom, String pnom, String loc, String pays) throws SQLException {
+        String query = "update clients set clt_nom = ?, clt_pnom = ?, clt_loc = ? , clt_pays = ?  where clt_num = ?";
+        PreparedStatement statement = conn.prepareStatement(query);
+        statement.setString (1, nom);
+        statement.setString (2, pnom);
+        statement.setString (3, loc);
+        statement.setString (4, pays);
+        statement.setString (5, num);
+        return statement;
+    }
+
+    public PreparedStatement deleteClient(String num) throws SQLException {
+        String query = "DELETE from clients where clt_num = ?";
+        PreparedStatement statement = conn.prepareStatement(query);
+        statement.setString (1, num);
+        return statement;
+    }
 }

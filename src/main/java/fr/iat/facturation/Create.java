@@ -31,7 +31,6 @@ public class Create extends HttpServlet {
 //            String insertQuery = "INSERT INTO clients (clt_num, clt_nom, clt_pnom, clt_loc, clt_pays) VALUES ('" + id + "','" + nom + "','" + prenom + "','" + loc + "','" + pays + "')";
 //            statement.executeUpdate(insertQuery);
             PreparedStatement statement = db.createClient(id, nom, prenom, loc, pays);
-            System.out.println(statement);
             statement.executeUpdate();
 
             // redirection

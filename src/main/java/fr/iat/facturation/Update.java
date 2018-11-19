@@ -16,7 +16,7 @@ public class Update extends HttpServlet {
     protected void doPost(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException, IOException {
 
         Database db = (Database) getServletContext().getAttribute("db");
-        Connection conn = db.getConnection();
+//        Connection conn = db.getConnection();
 
         String id = httpServletRequest.getParameter("id");
         String nom = httpServletRequest.getParameter("nom");
@@ -26,10 +26,12 @@ public class Update extends HttpServlet {
 
         try {
 
-            Statement statement = conn.createStatement();
+//            Statement statement = conn.createStatement();
             // UPDATE --------------------------------------------------------------------------------------------------
-            String updateQuery = "update clients set clt_nom='" + nom + "', clt_pnom='" + prenom + "', clt_loc='" + loc + "', clt_pays='" + pays + "'  where clt_num='" + id + "'";
-            statement.executeUpdate(updateQuery);
+//            String updateQuery = "update clients set clt_nom='" + nom + "', clt_pnom='" + prenom + "', clt_loc='" + loc + "', clt_pays='" + pays + "'  where clt_num='" + id + "'";
+//            statement.executeUpdate(updateQuery);
+            PreparedStatement statement = db.updateClient(id, nom, prenom, loc, pays);
+            statement.executeUpdate();
 
             // redirection
             httpServletResponse.sendRedirect("/clients.html");
