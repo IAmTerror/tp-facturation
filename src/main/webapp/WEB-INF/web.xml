@@ -56,7 +56,7 @@
 
     <servlet-mapping>
         <servlet-name>ListeClients</servlet-name>
-        <url-pattern>/clients.html</url-pattern>
+        <url-pattern>/clients</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
@@ -71,7 +71,7 @@
 
     <servlet-mapping>
         <servlet-name>Create</servlet-name>
-        <url-pattern>/create.jsp</url-pattern>
+        <url-pattern>/create</url-pattern>
     </servlet-mapping>
 
 </web-app>

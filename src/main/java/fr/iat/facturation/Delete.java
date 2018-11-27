@@ -2,6 +2,8 @@ package fr.iat.facturation;
 
 import fr.iat.facturation.model.Client;
 import fr.iat.facturation.service.Database;
+import freemarker.template.Template;
+import freemarker.template.TemplateException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Delete extends HttpServlet {
 
@@ -30,7 +34,7 @@ public class Delete extends HttpServlet {
             statement.executeUpdate();
 
             // redirection
-            httpServletResponse.sendRedirect("/clients.html");
+            httpServletResponse.sendRedirect("/clients");
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -42,6 +46,7 @@ public class Delete extends HttpServlet {
 
         Database db = (Database) getServletContext().getAttribute("db");
 //        Connection conn = db.getConnection();
+        Template delete = (Template) getServletContext().getAttribute("delete");
 
         String id = httpServletRequest.getParameter("id");
 
@@ -63,15 +68,21 @@ public class Delete extends HttpServlet {
                         rs.getString("clt_pays"));
             }
 
-            // pour les besoins de la vue
-            httpServletRequest.setAttribute("client", client);
-            // délegation à la vue
-            String jspview = "delete.jsp";
-            getServletConfig().getServletContext()
-                    .getRequestDispatcher("/WEB-INF/jsp/" + jspview)
-                    .forward(httpServletRequest, httpServletResponse);
+            Map<String, Object> datas = new HashMap<>();
+            datas.put("client", client);
+            delete.process(datas, httpServletResponse.getWriter());
+
+//            // pour les besoins de la vue
+//            httpServletRequest.setAttribute("client", client);
+//            // délegation à la vue
+//            String jspview = "delete.jsp";
+//            getServletConfig().getServletContext()
+//                    .getRequestDispatcher("/WEB-INF/jsp/" + jspview)
+//                    .forward(httpServletRequest, httpServletResponse);
 
         } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (TemplateException e) {
             e.printStackTrace();
         }
     }

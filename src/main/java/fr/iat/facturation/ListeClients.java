@@ -2,6 +2,9 @@ package fr.iat.facturation;
 
 import fr.iat.facturation.model.Client;
 import fr.iat.facturation.service.Database;
+import fr.iat.facturation.service.ServletListener;
+import freemarker.template.Template;
+import freemarker.template.TemplateException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ListeClients extends HttpServlet {
 
@@ -20,6 +25,7 @@ public class ListeClients extends HttpServlet {
 
         Database db = (Database) getServletContext().getAttribute("db");
 //        Connection conn = db.getConnection();
+        Template listeClients = (Template) getServletContext().getAttribute("listeClients");
 
         try {
 
@@ -38,15 +44,21 @@ public class ListeClients extends HttpServlet {
                         res.getString("clt_pays")));
             }
 
-            // pour les besoins de la vue
-            httpServletRequest.setAttribute("clients", clients);
-            // délégation à la vue
-            String laVue = "clients.jsp";
-            getServletConfig().getServletContext()
-                    .getRequestDispatcher("/WEB-INF/jsp/" + laVue).forward(httpServletRequest, httpServletResponse);
+            Map<String, Object> datas = new HashMap<>();
+            datas.put("clients", clients);
+            listeClients.process(datas, httpServletResponse.getWriter());
+
+//            // pour les besoins de la vue
+//            httpServletRequest.setAttribute("clients", clients);
+//            // délégation à la vue
+//            String laVue = "clients.jsp";
+//            getServletConfig().getServletContext()
+//                    .getRequestDispatcher("/WEB-INF/jsp/" + laVue).forward(httpServletRequest, httpServletResponse);
 
 
         } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (TemplateException e) {
             e.printStackTrace();
         }
     }
