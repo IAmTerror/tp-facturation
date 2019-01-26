@@ -56,6 +56,4 @@ public class ServletListener implements ServletContextListener {
 
     public void contextDestroyed(ServletContextEvent arg0) {
     }
-
-    // TODO: TEST trace git after linux locahost change (next commit : remove this todo)
 }
