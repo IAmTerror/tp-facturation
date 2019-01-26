@@ -34,7 +34,7 @@ public class ServletListener implements ServletContextListener {
         sc.setAttribute("db", db);
 
         Configuration cfg = new Configuration(Configuration.VERSION_2_3_25);
-        cfg.setServletContextForTemplateLoading(sc,"/WEB-INF/templates");
+        cfg.setServletContextForTemplateLoading(sc, "/WEB-INF/templates");
         cfg.setDefaultEncoding("UTF8");
         try {
             listeClients = cfg.getTemplate("clients.ftl");
@@ -56,4 +56,6 @@ public class ServletListener implements ServletContextListener {
 
     public void contextDestroyed(ServletContextEvent arg0) {
     }
+
+    // TODO: TEST trace git after linux locahost change (next commit : remove this todo)
 }
